@@ -2,9 +2,8 @@ set guicursor=i:block
 set shiftwidth=2
 set expandtab
 set nobackup
-set nowritebackup
+set noundofile
 set noswapfile
-set undofile
 set nohlsearch
 set incsearch
 set scrolloff=10
