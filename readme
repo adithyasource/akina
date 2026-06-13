@@ -25,6 +25,7 @@ other stuff installed:
     vim
     pciutils 
     smartmontools
+    tuptime
 
 setup
     to automatically turn back on after power failure
