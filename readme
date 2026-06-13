@@ -1,0 +1,28 @@
+akina
+
+alpine linux
+late 2012 mac mini
+i5-3210M
+16gb ddr3 ram
+kingston 240gb sata ssd
+samsung 500gb sata ssd (not added yet / waiting on the flex cable)
+
+services running currently on docker:
+    cloudflared         (for tunnels)
+    plex                (only for tv)
+    jellyfin            100.99.0.0:8096         (access thru tailscale)
+                        jf.domain.com           (just-in-case web access)
+    qbittorrent         qbt.domain.com
+    vaultwarden         vw.domain.dom
+    glances             g.domain.com
+
+not on docker:
+    tailscale
+    restic (need to set up)
+
+setup
+    to automatically turn back on after power failure
+        - https://williamlam.com/2013/02/enable-auto-startup-after-power-failure.html
+        apk add pciutils
+        setpci -s 0:1f.0 0xa4.b=0
+        or setpci -v -s 0:1f.0 0xa4.B=0:1 (i dont remember which one did it)
