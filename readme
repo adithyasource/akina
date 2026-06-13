@@ -16,13 +16,19 @@ services running currently on docker:
     vaultwarden         vw.domain.dom
     glances             g.domain.com
 
-not on docker:
+services on system:
     tailscale
-    restic (need to set up)
+
+other stuff installed:
+    docker docker-compose
+    tailscale
+    vim
+    pciutils 
+    smartmontools
 
 setup
     to automatically turn back on after power failure
-        - https://williamlam.com/2013/02/enable-auto-startup-after-power-failure.html
+        https://williamlam.com/2013/02/enable-auto-startup-after-power-failure.html
         apk add pciutils
         setpci -s 0:1f.0 0xa4.b=0
         or setpci -v -s 0:1f.0 0xa4.B=0:1 (i dont remember which one did it)
