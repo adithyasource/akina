@@ -16,16 +16,14 @@ services running currently on docker:
     vaultwarden         vw.domain.dom
     glances             g.domain.com
 
-services on system:
+main stuff installed on system:
     tailscale
+    tuptime
 
-other stuff installed:
-    docker docker-compose
-    tailscale
+tools and packages installed:
     vim
     pciutils 
     smartmontools
-    tuptime
 
 setup
     to automatically turn back on after power failure
