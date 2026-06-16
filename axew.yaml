@@ -1,0 +1,45 @@
+tick_interval: 3
+
+commands:
+  - name: kernel
+    cmd: >
+      echo "$(grep '^PRETTY_NAME=' /etc/os-release | cut -d= -f2 | tr -d '"') $(uname -m) / Linux $(uname -r)"
+    mode: static
+
+  - name: data
+    cmd: date
+
+  - name: sys uptime
+    cmd: tuptime | grep "System uptime"
+    mode: static
+
+  - name: uptime records
+    cmd: tuptime --tsince -259200 -t
+    mode: static
+
+  - name: docker
+    cmd: docker stats --no-stream
+
+  - name: system usage
+    cmd: >
+      ps -eo comm,%cpu,%mem --sort=-%mem | head -n 6
+
+  - name: cpu percent
+    cmd: >
+      echo "cpu usage: $(mpstat 1 1 | awk '/Average:/ && $NF ~ /^[0-9.]+$/ {printf "%.1f%%", 100 - $NF}')"
+
+  - name: memory percent
+    cmd: >
+      echo "$(free -b | awk '/Mem:/ {printf "memory usage: %.2f/%.2f gb\n", $3/1024/1024/1024, $2/1024/1024/1024}')"
+
+  - name: disk usage
+    cmd: >
+      df -B1 / | awk 'NR==2 {printf "disk space left: %.2f gb\n", $4/1024/1024/1024; printf "disk usage: %.2f/%.2f gb\n", $3/1024/1024/1024, $2/1024/1024/1024}'
+    mode: static
+
+  - name: sensors
+    cmd: >
+      sensors | awk '/Package id 0:|Core 0:|Core 1:|Exhaust/ {print}'
+  - name: network stats
+    cmd: >
+      (cat /proc/net/dev; sleep 1; cat /proc/net/dev) | grep "eth0:" | awk 'NR==1{rx1=$2;tx1=$10} NR==2{printf "RX: %.2f MB/s, TX: %.2f MB/s\n", ($2-rx1)/1024/1024, ($10-tx1)/1024/1024}'

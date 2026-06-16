@@ -14,11 +14,10 @@ services running currently on docker:
                         jf.domain.com           (just-in-case web access)
     qbittorrent         qbt.domain.com
     vaultwarden         vw.domain.dom
-    glances             g.domain.com
 
 main stuff installed on system:
+    axew                ax.domain.com
     tailscale
-    tuptime
 
 tools and packages installed:
     vim
