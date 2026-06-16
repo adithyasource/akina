@@ -19,11 +19,6 @@ main stuff installed on system:
     axew                ax.domain.com
     tailscale
 
-tools and packages installed:
-    vim
-    pciutils 
-    smartmontools
-
 setup
     to automatically turn back on after power failure
         https://williamlam.com/2013/02/enable-auto-startup-after-power-failure.html
