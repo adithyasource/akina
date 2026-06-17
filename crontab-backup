@@ -1,0 +1,3 @@
+0       3       *       *       *       su akina -c "/home/akina/scripts/restic-backup.sh"
+0       2       *       *       0       smartctl -t short /dev/sda
+0       2       1       *       *       smartctl -t long /dev/sda

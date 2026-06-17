@@ -45,6 +45,17 @@ commands:
   - name: sensors
     cmd: >
       sensors | awk '/Package id 0:|Core 0:|Core 1:|Exhaust/ {print}'
+
   - name: network stats
     cmd: >
       (cat /proc/net/dev; sleep 1; cat /proc/net/dev) | grep "eth0:" | awk 'NR==1{rx1=$2;tx1=$10} NR==2{printf "RX: %.2f MB/s, TX: %.2f MB/s\n", ($2-rx1)/1024/1024, ($10-tx1)/1024/1024}'
+
+  - name: smart metrics
+    cmd: >
+      smartctl -H -A /dev/sda | grep -E 'SMART overall-health|Power_On_Hours|Temperature_Celsius|Reported_Uncorrect|Reallocated_Event_Count|SATA_CRC_Error_Count|SSD_Life_Left'
+    mode: static
+
+  - name: last restic
+    cmd: >
+      cat /home/akina/.cache/restic-logs
+    mode: static

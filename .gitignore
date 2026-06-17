@@ -6,3 +6,6 @@
 !axew.yaml
 !.toprc
 !.vimrc
+!crontab-backup
+!scripts/
+!scripts/**
