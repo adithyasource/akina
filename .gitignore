@@ -4,3 +4,5 @@
 !.gitignore
 !readme
 !axew.yaml
+!.toprc
+!.vimrc
