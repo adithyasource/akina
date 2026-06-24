@@ -7,25 +7,27 @@ i5-3210M
 kingston 240gb sata ssd
 samsung 500gb sata ssd (not added yet / waiting on the flex cable)
 
+1.111b class domain (xxxxxxx.xyz) registerd on cloudflare
+
 services running currently on docker:
     cloudflared         (for tunnels)
     plex                (only for tv)
     jellyfin            100.99.0.0:8096         (access thru tailscale)
-                        jf.domain.com           (just-in-case web access)
-    qbittorrent         qbt.domain.com
-    vaultwarden         vw.domain.dom
+                        jf.xxxxxxx.xyz          (just-in-case web access)
+    qbittorrent         qbt.xxxxxxx.xyz
+    vaultwarden         vw.xxxxxxx.xyz
 
 main stuff installed on system:
-    axew                ax.domain.com
+    axew                ax.xxxxxxx.xyz
     tailscale
 
 cron jobs:
-    restic              backup vaultwarden to r2
-    smart tests
+    restic              backup vaultwarden to b2
+    SMART tests
 
 setup
     to automatically turn back on after power failure
-        https://williamlam.com/2013/02/enable-auto-startup-after-power-failure.html
-        apk add pciutils
-        setpci -s 0:1f.0 0xa4.b=0
-        or setpci -v -s 0:1f.0 0xa4.B=0:1 (i dont remember which one did it)
+    - https://williamlam.com/2013/02/enable-auto-startup-after-power-failure.html
+    - apk add pciutils
+    - setpci -s 0:1f.0 0xa4.b=0
+    - or setpci -v -s 0:1f.0 0xa4.B=0:1 (i dont remember which one did it)
