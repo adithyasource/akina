@@ -42,11 +42,6 @@ commands:
       df -B1 / | awk 'NR==2 {printf "[sys disk] space left: %.2f gb\n", $4/1024/1024/1024; printf "disk usage: %.2f/%.2f gb\n", $3/1024/1024/1024, $2/1024/1024/1024}'
     mode: static
 
-  - name: ext ssd usage
-    cmd: >
-      df -B1 /home/akina/extssd | awk 'NR==2 {printf "[extssd] space left: %.2f gb\n", $4/1024/1024/1024; printf "disk usage: %.2f/%.2f gb\n", $3/1024/1024/1024, $2/1024/1024/1024}'
-    mode: static
-
   - name: sensors
     cmd: >
       sensors | awk '/Package id 0:|Core 0:|Core 1:|Exhaust/ {print}'
