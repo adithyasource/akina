@@ -18,7 +18,7 @@ services:
       - TZ=Etc/UTC
     volumes:
       - /home/akina/configs/jellyfin:/config
-      - /home/akina/data/media:/media
+      - /home/akina/drive0/media:/media
     ports:
       - 8096:8096
     networks:
@@ -35,7 +35,7 @@ services:
       - VERSION=docker
     volumes:
       - /home/akina/configs/plex:/config
-      - /home/akina/data/media:/media
+      - /home/akina/drive0/media:/media
     network_mode: host
     restart: unless-stopped
 
