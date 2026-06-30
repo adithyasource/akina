@@ -7,24 +7,17 @@ tick_interval: 3
 
 commands:
   - name: kernel
-    cmd: >
-      echo "$(grep '^PRETTY_NAME=' /etc/os-release | cut -d= -f2 | tr -d '"') $(uname -m) / Linux $(uname -r)"
+    cmd: (source /etc/os-release; echo "$PRETTY_NAME")
     mode: static
 
   - name: date
     cmd: date
 
-  - name: cpu percent
-    cmd: >
-      HOME=/home/akina top -b -n2 -d0.5 | grep "%Cpu" | tail -1
-
-  - name: memory percent
-    cmd: >
-      HOME=/home/akina top -b -n1 | grep "GiB Mem"
+  - name: vmstat
+    cmd: vmstat 1 2 -S M | awk 'NR<=2 || NR==4'
 
   - name: disk usage
-    cmd: >
-      df -B1 / | awk 'NR==2 {printf "[sys disk] space left: %.2f gb\n", $4/1024/1024/1024; printf "disk usage: %.2f/%.2f gb\n", $3/1024/1024/1024, $2/1024/1024/1024}'
+    cmd: df -h /
     mode: static
 
   - name: sensors
@@ -37,11 +30,10 @@ commands:
 
   - name: system usage cpu
     cmd: >
-      ps -eo comm,%cpu | sort -k2 -nr | head -n 5 | awk '{printf "%-20s %.1f%%\n",$1,$2}'
+      ps -eo comm,%cpu --sort=-%cpu | head -6
 
-  - name: system usage mem
-    cmd: >
-      ps -eo comm,rss | sort -k2 -nr | head -n 5 | awk '{printf "%-20s %.1f MB\n",$1,$2/1024}'
+  - name: docker
+    cmd: docker stats --no-stream
 
   - name: sys uptime
     cmd: tuptime | grep "System uptime"
@@ -51,12 +43,9 @@ commands:
     cmd: tuptime --tsince -172800 -t
     mode: static
 
-  - name: docker
-    cmd: docker stats --no-stream
-
   - name: restic logs
     cmd: >
-      tail -n 10 /home/akina/.logs/restic
+      tail -n 4 /home/akina/.logs/restic
     mode: static
 
   - name: smart logs
