@@ -4,8 +4,6 @@
 !.gitignore
 !readme
 !axew.yaml
-!.toprc
-!.vimrc
 !crontab
 !scripts/
 !scripts/**
