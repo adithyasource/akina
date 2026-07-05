@@ -4,22 +4,21 @@ alpine linux
 late 2012 mac mini
 i5-3210M
 16gb ddr3 ram
-samsung 500gb sata ssd
-tplink t3u plus wifi adapter
+hp 500gb sata ssd
+tplink t3u plus
 
 1.111b class domain (xxxxxxx.xyz) registerd on cloudflare
 
 services running currently on docker:
-    cloudflared         (for tunnels)
-    plex                (only for tv)
-    jellyfin            100.99.0.0:8096         (access thru tailscale)
-                        jf.xxxxxxx.xyz          (just-in-case web access)
+    cloudflared         for tunnels
+    plex                only for my tv
+    jellyfin            100.99.0.0:8096
     qbittorrent         qbt.xxxxxxx.xyz
     vaultwarden         vw.xxxxxxx.xyz
 
 main stuff installed on system:
     axew                ax.xxxxxxx.xyz
-    tailscale
+    tailscale           machine set to 100.99.0.0
 
 cron jobs:
     restic              backup vaultwarden to b2
@@ -29,8 +28,7 @@ setup
     to automatically turn back on after power failure
     - https://williamlam.com/2013/02/enable-auto-startup-after-power-failure.html
     - apk add pciutils
-    - setpci -s 0:1f.0 0xa4.b=0
-    - or setpci -v -s 0:1f.0 0xa4.B=0:1 (i dont remember which one did it)
+    - setpci -s 0:1f.0 0xa4.b=0 or setpci -v -s 0:1f.0 0xa4.B=0:1 (i dont remember which one did it)
 
     for t3u plus drivers
     - apk add linux-firmware-rtw88

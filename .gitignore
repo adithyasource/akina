@@ -7,3 +7,4 @@
 !crontab
 !scripts/
 !scripts/**
+!apk_packages
