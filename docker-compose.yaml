@@ -7,6 +7,9 @@ services:
       - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
     networks:
       - services
+    # temporary until i get update axew properly
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     restart: unless-stopped
 
   jellyfin:

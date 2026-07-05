@@ -5,6 +5,7 @@ late 2012 mac mini
 i5-3210M
 16gb ddr3 ram
 samsung 500gb sata ssd
+tplink t3u plus wifi adapter
 
 1.111b class domain (xxxxxxx.xyz) registerd on cloudflare
 
@@ -30,3 +31,6 @@ setup
     - apk add pciutils
     - setpci -s 0:1f.0 0xa4.b=0
     - or setpci -v -s 0:1f.0 0xa4.B=0:1 (i dont remember which one did it)
+
+    for t3u plus drivers
+    - apk add linux-firmware-rtw88

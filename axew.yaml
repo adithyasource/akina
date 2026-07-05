@@ -26,7 +26,7 @@ commands:
 
   - name: network stats
     cmd: >
-      (cat /proc/net/dev; sleep 1; cat /proc/net/dev) | grep "eth0:" | awk 'NR==1{rx1=$2;tx1=$10} NR==2{printf "RX: %.2f MB/s, TX: %.2f MB/s\n", ($2-rx1)/1024/1024, ($10-tx1)/1024/1024}'
+      (cat /proc/net/dev; sleep 1; cat /proc/net/dev) | grep "wlan0:" | awk 'NR==1{rx1=$2;tx1=$10} NR==2{printf "RX: %.2f MB/s, TX: %.2f MB/s\n", ($2-rx1)/1024/1024, ($10-tx1)/1024/1024}'
 
   - name: system usage cpu
     cmd: >
