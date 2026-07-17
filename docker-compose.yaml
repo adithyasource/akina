@@ -2,14 +2,11 @@ services:
   cloudflared:
     image: cloudflare/cloudflared:latest
     container_name: cloudflared
-    command: tunnel run
     environment:
       - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
-    networks:
-      - services
-    # temporary until i get update axew properly
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+    command: tunnel --config /etc/cloudflared/config.yml run
+    volumes:
+       - /home/akina/configs/cloudflared/config.yml:/etc/cloudflared/config.yml:ro
     restart: unless-stopped
 
   jellyfin:
@@ -24,8 +21,6 @@ services:
       - /home/akina/data/media:/media
     ports:
       - 8096:8096
-    networks:
-      - services
     restart: unless-stopped
 
   plex:
@@ -51,8 +46,6 @@ services:
       - WEBSOCKET_ENABLED=true
     volumes:
       - /home/akina/data/vaultwarden:/data
-    networks:
-      - services
     restart: unless-stopped
 
   qbittorrent:
@@ -67,12 +60,6 @@ services:
       - /home/akina/configs/qbittorrent:/config
       - /home/akina/data/media:/downloads
     ports:
-      - "6881:6881"
-      - "6881:6881/udp"
-    networks:
-      - services
+      - 6881:6881
+      - 6881:6881/udp
     restart: unless-stopped
-
-networks:
-  services:
-    external: true

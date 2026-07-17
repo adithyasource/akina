@@ -1,0 +1,11 @@
+ingress:
+  - hostname: jf.1003211.xyz
+    service: http://jellyfin:8096
+
+  - hostname: vw.1003211.xyz
+    service: http://vaultwarden:80
+
+  - hostname: qbt.1003211.xyz
+    service: http://qbittorrent:8080
+
+  - service: http_status:404
