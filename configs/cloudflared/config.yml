@@ -8,4 +8,10 @@ ingress:
   - hostname: qbt.1003211.xyz
     service: http://qbittorrent:8080
 
+  - hostname: qbt.1003211.xyz
+    service: http://qbittorrent:8080
+
+  - hostname: ax.1003211.xyz
+    service: http://axew:8080
+
   - service: http_status:404

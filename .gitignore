@@ -3,7 +3,6 @@
 !.env.example
 !.gitignore
 !readme
-!axew.yaml
 !crontab
 !scripts/
 !scripts/**
@@ -11,3 +10,5 @@
 !configs/
 !configs/cloudflared/
 !configs/cloudflared/**
+!configs/axew/
+!configs/axew/**

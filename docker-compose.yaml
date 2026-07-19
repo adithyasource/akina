@@ -63,3 +63,12 @@ services:
       - 6881:6881
       - 6881:6881/udp
     restart: unless-stopped
+
+  axew:
+    image: adithyasrc/axew:latest
+    container_name: axew
+    pid: host
+    privileged: true
+    volumes:
+      - /home/akina/configs/axew/config.yaml:/app/config.yaml:ro
+    restart: unless-stopped
