@@ -8,17 +8,15 @@ hp 500gb sata ssd
 tplink t3u plus
 
 1.111b class domain (xxxxxxx.xyz) registerd on cloudflare
+tailscale running on host and set to 100.99.0.0
 
 services running currently on docker:
     cloudflared         for tunnels
-    plex                only for my tv
+    plex                only for tv
     jellyfin            100.99.0.0:8096
     qbittorrent         qbt.xxxxxxx.xyz
     vaultwarden         vw.xxxxxxx.xyz
-
-main stuff installed on system:
     axew                ax.xxxxxxx.xyz
-    tailscale           machine set to 100.99.0.0
 
 cron jobs:
     restic              backup vaultwarden to b2
