@@ -35,14 +35,6 @@ commands:
   - name: docker
     cmd: docker stats --no-stream
 
-  - name: sys uptime
-    cmd: tuptime | grep "System uptime"
-    mode: static
-
-  - name: uptime records
-    cmd: tuptime --tsince -172800 -t
-    mode: static
-
   - name: restic logs
     cmd: >
       tail -n 4 /home/akina/.logs/restic
@@ -50,5 +42,5 @@ commands:
 
   - name: smart logs
     cmd: >
-      tail -n 10 /home/akina/.logs/smart
+      tail -n 4 /home/akina/.logs/smart
     mode: static

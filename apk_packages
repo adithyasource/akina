@@ -31,6 +31,5 @@ rsync
 smartmontools
 speedtest-cli
 tailscale
-tuptime
 wpa_supplicant
 yazi
