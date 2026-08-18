@@ -25,11 +25,3 @@ services running currently on docker:
 cron jobs:
     restic              backup vaultwarden to b2
     SMART tests
-
-setup:
-
-to automatically turn back on after power failure
-    pciutils
-    https://major.io/p/single-boot-linux-on-an-intel-mac-mini/
-    https://williamlam.com/2013/02/enable-auto-startup-after-power-failure.html
-    setpci -s 0:1f.0 0xa4.b=0 / setpci -v -s 0:1f.0 0xa4.B=0:1

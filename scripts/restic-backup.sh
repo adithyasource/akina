@@ -2,7 +2,7 @@
 
 set -eu
 
-. "/home/akina/.config/restic/env"
+. "/home/user/.config/restic/env"
 
 BACKUP_PATHS="/home/akina/data/vaultwarden"
 

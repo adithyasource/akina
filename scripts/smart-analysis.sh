@@ -1,7 +1,7 @@
 #!/bin/sh
 
 DEVICE="/dev/sda"
-OUT="/home/akina/.logs/smart"
+OUT="/home/user/.logs/smart"
 
 SMART="$(smartctl -a "$DEVICE")"
 
