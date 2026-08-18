@@ -4,7 +4,7 @@ set -eu
 
 . "/home/user/.config/restic/env"
 
-BACKUP_PATHS="/home/akina/data/vaultwarden"
+BACKUP_PATHS="/home/user/data/vaultwarden"
 
 if restic backup "$BACKUP_PATHS" &&
    restic forget \
@@ -13,8 +13,8 @@ if restic backup "$BACKUP_PATHS" &&
       --keep-monthly 12 \
       --prune
 then
-    echo "$(date '+%F %T') | OK | $BACKUP_PATHS" >> /home/akina/.logs/restic
+    echo "$(date '+%F %T') | OK | $BACKUP_PATHS" >> /home/user/.logs/restic
 else
-    echo "$(date '+%F %T') | FAIL | $BACKUP_PATHS" >> /home/akina/.logs/restic
+    echo "$(date '+%F %T') | FAIL | $BACKUP_PATHS" >> /home/user/.logs/restic
     exit 1
 fi

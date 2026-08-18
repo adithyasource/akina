@@ -40,10 +40,10 @@ commands:
 
   - name: restic logs
     cmd: >
-      tail -n 4 /home/akina/.logs/restic
+      tail -n 4 /home/user/.logs/restic
     mode: static
 
   - name: smart logs
     cmd: >
-      tail -n 4 /home/akina/.logs/smart
+      tail -n 4 /home/user/.logs/smart
     mode: static

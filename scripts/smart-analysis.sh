@@ -13,12 +13,11 @@ uncorrect=$(printf "%s\n" "$SMART" | awk '$2=="Reported_Uncorrect"{print $10}')
 crc=$(printf "%s\n" "$SMART" | awk '$2=="UDMA_CRC_Error_Count"{print $10}')
 selftest=$(printf "%s\n" "$SMART" | awk '/^# 1/{print $3" "$4" "$5}')
 
-printf "%s | %s | %d°C | %dh | Realloc:%s Uncorrect:%s CRC:%s\n" \
+printf "%s | %s | %d°C | %dh | Realloc:%s CRC:%s\n" \
     "$(date '+%Y-%m-%d %H:%M:%S')" \
     "$health" \
     "$temp" \
     "$hours" \
     "$realloc" \
-    "$uncorrect" \
     "$crc" \
     >> "$OUT"
