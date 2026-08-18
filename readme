@@ -1,14 +1,18 @@
 akina
 
-alpine linux
+debian
 late 2012 mac mini
 i5-3210M
 16gb ddr3 ram
-hp 500gb sata ssd
-tplink t3u plus
+toshiba 1tb hdd
+internal bcm4331 chip
+tplink t3u plus rtl8812bu
 
 1.111b class domain (xxxxxxx.xyz) registerd on cloudflare
 tailscale running on host and set to 100.99.0.0
+
+internal wifi connects to the uni's ap for internet
+t3u runs on ap mode for me to connect for high bitrate streaming + internet passthrough
 
 services running currently on docker:
     cloudflared         for tunnels
@@ -22,11 +26,10 @@ cron jobs:
     restic              backup vaultwarden to b2
     SMART tests
 
-setup
-    to automatically turn back on after power failure
-    - https://williamlam.com/2013/02/enable-auto-startup-after-power-failure.html
-    - apk add pciutils
-    - setpci -s 0:1f.0 0xa4.b=0 or setpci -v -s 0:1f.0 0xa4.B=0:1 (i dont remember which one did it)
+setup:
 
-    for t3u plus drivers
-    - apk add linux-firmware-rtw88
+to automatically turn back on after power failure
+    pciutils
+    https://major.io/p/single-boot-linux-on-an-intel-mac-mini/
+    https://williamlam.com/2013/02/enable-auto-startup-after-power-failure.html
+    setpci -s 0:1f.0 0xa4.b=0 / setpci -v -s 0:1f.0 0xa4.B=0:1
