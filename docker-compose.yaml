@@ -6,7 +6,7 @@ services:
       - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
     command: tunnel --config /etc/cloudflared/config.yml run
     volumes:
-       - /home/akina/configs/cloudflared/config.yml:/etc/cloudflared/config.yml:ro
+       - /home/user/configs/cloudflared/config.yml:/etc/cloudflared/config.yml:ro
     restart: unless-stopped
 
   jellyfin:
@@ -17,25 +17,25 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /home/akina/configs/jellyfin:/config
-      - /home/akina/data/media:/media
+      - /home/user/configs/jellyfin:/config
+      - /home/user/data/media:/media
     ports:
       - 8096:8096
     restart: unless-stopped
 
-  plex:
-    image: lscr.io/linuxserver/plex:latest
-    container_name: plex
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Kolkata
-      - VERSION=docker
-    volumes:
-      - /home/akina/configs/plex:/config
-      - /home/akina/data/media:/media
-    network_mode: host
-    restart: unless-stopped
+#  plex:
+#    image: lscr.io/linuxserver/plex:latest
+#    container_name: plex
+#    environment:
+#      - PUID=1000
+#      - PGID=1000
+#      - TZ=Asia/Kolkata
+#      - VERSION=docker
+#    volumes:
+#      - /home/user/configs/plex:/config
+#      - /home/user/data/media:/media
+#    network_mode: host
+#    restart: unless-stopped
 
   vaultwarden:
     image: vaultwarden/server:latest
@@ -45,7 +45,9 @@ services:
       - SIGNUPS_ALLOWED=false
       - WEBSOCKET_ENABLED=true
     volumes:
-      - /home/akina/data/vaultwarden:/data
+      - /home/user/data/vaultwarden:/data
+    ports:
+      - 8080:80
     restart: unless-stopped
 
   qbittorrent:
@@ -58,9 +60,10 @@ services:
       - WEBUI_PORT=8080
       - TORRENTING_PORT=6881
     volumes:
-      - /home/akina/configs/qbittorrent:/config
-      - /home/akina/data/media:/downloads
+      - /home/user/configs/qbittorrent:/config
+      - /home/user/data/media:/downloads
     ports:
+      - 8082:8080
       - 6881:6881
       - 6881:6881/udp
     restart: unless-stopped
@@ -71,5 +74,7 @@ services:
     pid: host
     privileged: true
     volumes:
-      - /home/akina/configs/axew/config.yaml:/app/config.yaml:ro
+      - /home/user/configs/axew/config.yaml:/app/config.yaml:ro
+    ports:
+      - 8084:8080
     restart: unless-stopped

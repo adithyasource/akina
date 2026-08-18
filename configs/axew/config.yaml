@@ -1,13 +1,12 @@
 # depends on the following packages
 # procps
-# tuptime
 # lm-sensors
 
 tick_interval: 3
 
 commands:
   - name: kernel
-    cmd: (source /etc/os-release; echo "$PRETTY_NAME")
+    cmd: grep '^PRETTY_NAME=' /etc/*-release | cut -d= -f2- | tr -d '"'
     mode: static
 
   - name: date
@@ -24,9 +23,13 @@ commands:
     cmd: >
       sensors | awk '/Package id 0:|Core 0:|Core 1:|Exhaust/ {print}'
 
-  - name: network stats
+  - name: internal bcm4331 stats
     cmd: >
-      (cat /proc/net/dev; sleep 1; cat /proc/net/dev) | grep "wlan0:" | awk 'NR==1{rx1=$2;tx1=$10} NR==2{printf "RX: %.2f MB/s, TX: %.2f MB/s\n", ($2-rx1)/1024/1024, ($10-tx1)/1024/1024}'
+      (cat /proc/net/dev; sleep 1; cat /proc/net/dev) | grep "wlp2s0:" | awk 'NR==1{rx1=$2;tx1=$10} NR==2{printf "RX: %.2f MB/s, TX: %.2f MB/s\n", ($2-rx1)/1024/1024, ($10-tx1)/1024/1024}'
+
+  - name: usb rtw8812 stats
+    cmd: >
+      (cat /proc/net/dev; sleep 1; cat /proc/net/dev) | grep "wlx20e15d3dc107:" | awk 'NR==1{rx1=$2;tx1=$10} NR==2{printf "RX: %.2f MB/s, TX: %.2f MB/s\n", ($2-rx1)/1024/1024, ($10-tx1)/1024/1024}'
 
   - name: system usage cpu
     cmd: >
