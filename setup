@@ -1,0 +1,48 @@
+to automatically turn back on after power failure:
+
+pciutils
+https://major.io/p/single-boot-linux-on-an-intel-mac-mini/
+https://williamlam.com/2013/02/enable-auto-startup-after-power-failure.html
+setpci -s 0:1f.0 0xa4.b=0 / setpci -v -s 0:1f.0 0xa4.B=0:1
+
+
+wifi:
+
+drivers
+    sudo apt install build-essential dkms linux-headers-$(uname -r)
+
+    broadcom
+        sudo apt install broadcom-sta-dkms
+        sudo modprobe -r b43 b43legacy ssb brcmsmac bcma
+        sudo modprobe wl
+        sudo vi /etc/modprobe.d/blacklist-broadcom.conf -> blacklist b43...
+        sudo update-initramfs -u
+
+    RinCat/RTL88x2BU
+        git clone "https://github.com/RinCat/RTL88x2BU-Linux-Driver.git" /usr/src/rtl88x2bu-git
+        sed -i 's/PACKAGE_VERSION="@PKGVER@"/PACKAGE_VERSION="git"/g' /usr/src/rtl88x2bu-git/dkms.conf
+        dkms add -m rtl88x2bu -v git
+        dkms autoinstall
+        sudo vi /etc/modprobe.d/rtw8822bu.conf -> blacklist rtw88_8822bu
+        sudo modprobe 88x2bu
+
+
+nmcli device wifi list ifname wlp2s0
+nmcli device wifi connect "uni_wifi" password "pass" ifname wlp2s0
+
+sudo nmcli connection add type wifi ifname wlx20e15d3dc107 con-name akina-ap ssid akina-net
+sudo nmcli connection modify akina-ap 802-11-wireless.mode ap 802-11-wireless.band a 802-11-wireless.channel 36 wifi-sec.key-mgmt wpa-psk wifi-sec.psk "akina-net pass"
+sudo nmcli connection modify akina-ap ipv4.method shared ipv4.addresses 10.42.0.1/24 ipv4.never-default yes
+sudo nmcli connection up akina-ap
+
+sudo nmcli connection modify "akina-ap" 802-11-wireless.channel-width 80mhz
+# only moved it to 40mhz
+sudo tee /etc/modprobe.d/88x2bu.conf >/dev/null <<'EOF'
+options 88x2bu rtw_vht_enable=2 rtw_bw_mode=0x21
+EOF
+# enabling vht brought it to full 80mhz
+sudo nmcli connection down "akina-ap"
+sudo modprobe -r 88x2bu
+sudo modprobe 88x2bu
+sudo nmcli connection up "akina-ap"
+sudo iw dev wlx20e15d3dc107 info -> finally got channel 36 (5180 MHz), width: 80 MHz, center1: 5210 MHz
