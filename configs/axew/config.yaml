@@ -35,6 +35,10 @@ commands:
     cmd: >
       ps -eo comm,%cpu --sort=-%cpu | head -6
 
+  - name: uptime records
+    cmd: tuptime --tsince -172800 -t
+    mode: static
+
   - name: docker
     cmd: docker stats --no-stream
 
