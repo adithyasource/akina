@@ -1,6 +1,4 @@
-# depends on the following packages
-# procps
-# lm-sensors
+# requires: procps lm-sensors tuptime
 
 tick_interval: 3
 
@@ -45,9 +43,4 @@ commands:
   - name: restic logs
     cmd: >
       tail -n 4 /home/user/.logs/restic
-    mode: static
-
-  - name: smart logs
-    cmd: >
-      tail -n 4 /home/user/.logs/smart
     mode: static

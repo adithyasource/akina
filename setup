@@ -36,7 +36,7 @@ sudo nmcli connection modify akina-ap ipv4.method shared ipv4.addresses 10.42.0.
 sudo nmcli connection up akina-ap
 
 sudo nmcli connection modify "akina-ap" 802-11-wireless.channel-width 80mhz
-# only moved it to 40mhz
+# this only moved it to 40mhz
 sudo tee /etc/modprobe.d/88x2bu.conf >/dev/null <<'EOF'
 options 88x2bu rtw_vht_enable=2 rtw_bw_mode=0x21
 EOF
