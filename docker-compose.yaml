@@ -23,20 +23,6 @@ services:
       - 8096:8096
     restart: unless-stopped
 
-#  plex:
-#    image: lscr.io/linuxserver/plex:latest
-#    container_name: plex
-#    environment:
-#      - PUID=1000
-#      - PGID=1000
-#      - TZ=Asia/Kolkata
-#      - VERSION=docker
-#    volumes:
-#      - /home/user/configs/plex:/config
-#      - /home/user/data/media:/media
-#    network_mode: host
-#    restart: unless-stopped
-
   vaultwarden:
     image: vaultwarden/server:latest
     container_name: vaultwarden
@@ -46,8 +32,6 @@ services:
       - WEBSOCKET_ENABLED=true
     volumes:
       - /home/user/data/vaultwarden:/data
-    ports:
-      - 8080:80
     restart: unless-stopped
 
   qbittorrent:
@@ -63,7 +47,6 @@ services:
       - /home/user/configs/qbittorrent:/config
       - /home/user/data/media:/downloads
     ports:
-      - 8082:8080
       - 6881:6881
       - 6881:6881/udp
     restart: unless-stopped
@@ -75,6 +58,18 @@ services:
     privileged: true
     volumes:
       - /home/user/configs/axew/config.yaml:/app/config.yaml:ro
-    ports:
-      - 8084:8080
     restart: unless-stopped
+
+#  plex:
+#    image: lscr.io/linuxserver/plex:latest
+#    container_name: plex
+#    environment:
+#      - PUID=1000
+#      - PGID=1000
+#      - TZ=Asia/Kolkata
+#      - VERSION=docker
+#    volumes:
+#      - /home/user/configs/plex:/config
+#      - /home/user/data/media:/media
+#    network_mode: host
+#    restart: unless-stopped

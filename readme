@@ -5,18 +5,17 @@ late 2012 mac mini
 i5-3210M
 16gb ddr3 ram
 toshiba 1tb hdd
+
 internal bcm4331 chip
+    connects to the uni's ap for internet
 tplink t3u plus rtl8812bu
+    runs on ap mode for me to connect for high bitrate streaming + internet passthrough
 
 1.111b class domain (xxxxxxx.xyz) registerd on cloudflare
 tailscale running on host and set to 100.99.0.0
 
-internal wifi connects to the uni's ap for internet
-t3u runs on ap mode for me to connect for high bitrate streaming + internet passthrough
-
 services running currently on docker:
     cloudflared         for tunnels
-    plex                only for tv
     jellyfin            100.99.0.0:8096
     qbittorrent         qbt.xxxxxxx.xyz
     vaultwarden         vw.xxxxxxx.xyz
@@ -24,4 +23,3 @@ services running currently on docker:
 
 cron jobs:
     restic              backup vaultwarden to b2
-    SMART tests
