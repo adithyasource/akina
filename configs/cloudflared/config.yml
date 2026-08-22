@@ -1,5 +1,5 @@
 ingress:
-  - hostname: qbt.1003211.xyz
+  - hostname: qb.1003211.xyz
     service: http://qbittorrent:8080
 
   - hostname: vw.1003211.xyz
@@ -7,5 +7,8 @@ ingress:
 
   - hostname: ax.1003211.xyz
     service: http://axew:8080
+
+  - hostname: pl.1003211.xyz
+    service: http://paperless:8000
 
   - service: http_status:404

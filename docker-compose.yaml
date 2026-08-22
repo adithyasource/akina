@@ -60,6 +60,31 @@ services:
       - /home/user/configs/axew/config.yaml:/app/config.yaml:ro
     restart: unless-stopped
 
+  paperless-db:
+    image: docker.io/valkey/valkey:9-alpine
+    restart: unless-stopped
+    volumes:
+      - /home/user/data/paperless/valkey:/data
+
+  paperless:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    restart: unless-stopped
+    depends_on:
+      - paperless-db
+    ports:
+      - "8000:8000"
+    volumes:
+      - /home/user/data/paperless/data:/usr/src/paperless/data
+      - /home/user/data/paperless/media:/usr/src/paperless/media
+      - /home/user/data/paperless/export:/usr/src/paperless/export
+      - /home/user/data/paperless/consume:/usr/src/paperless/consume
+    environment:
+      PAPERLESS_REDIS: redis://paperless-db:6379
+      PAPERLESS_DBENGINE: sqlite
+      PAPERLESS_SECRET_KEY: ${PAPERLESS_SECRET_KEY}
+      PAPERLESS_URL: ${PAPERLESS_URL}
+      PAPERLESS_CSRF_TRUSTED_ORIGINS: ${PAPERLESS_CSRF_TRUSTED_ORIGINS}
+
 #  plex:
 #    image: lscr.io/linuxserver/plex:latest
 #    container_name: plex
