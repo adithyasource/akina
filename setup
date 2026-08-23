@@ -51,3 +51,11 @@ sudo iw dev wlx20e15d3dc107 info -> finally got channel 36 (5180 MHz), width: 80
 # switching wifi to hotspot or sumthing
 sudo nmcli device disconnect wlp2s0
 sudo nmcli device wifi connect "iPhone" ifname wlp2s0 -a
+
+
+# restore from restic commit
+restic snapshots
+docker compose down vaultwarden
+restic restore xxxxxxxx --target /tmp/vaultwarden-restore --include /home/user/data/vaultwarden
+mv data/vaultwarden data/vaultwarden-old
+mv /tmp/vaultwarden-restore/home/user/data/vaultwarden /home/user/data/vaultwarden
