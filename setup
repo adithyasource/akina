@@ -46,3 +46,8 @@ sudo modprobe -r 88x2bu
 sudo modprobe 88x2bu
 sudo nmcli connection up "akina-ap"
 sudo iw dev wlx20e15d3dc107 info -> finally got channel 36 (5180 MHz), width: 80 MHz, center1: 5210 MHz
+
+
+# switching wifi to hotspot or sumthing
+sudo nmcli device disconnect wlp2s0
+sudo nmcli device wifi connect "iPhone" ifname wlp2s0 -a

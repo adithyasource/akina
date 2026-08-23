@@ -23,4 +23,4 @@ services running currently on docker:
     paperless           pl.xxxxxxx.xyz
 
 cron jobs:
-    restic              backup vaultwarden to b2
+    restic              backup vaultwarden to cf r2

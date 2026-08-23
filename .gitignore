@@ -1,6 +1,7 @@
 *
 !docker-compose.yaml
 !.env.example
+!.restic.env.example
 !.gitignore
 !readme
 !setup
