@@ -60,19 +60,14 @@ services:
       - /home/user/configs/axew/config.yaml:/app/config.yaml:ro
     restart: unless-stopped
 
-  paperless-db:
-    image: docker.io/valkey/valkey:9-alpine
-    container_name: paperless-db
-    restart: unless-stopped
-    volumes:
-      - /home/user/data/paperless/valkey:/data
-
   paperless:
     image: ghcr.io/paperless-ngx/paperless-ngx:latest
     container_name: paperless
     restart: unless-stopped
     depends_on:
       - paperless-db
+      - paperless-gotenberg
+      - paperless-tika
     ports:
       - "8000:8000"
     volumes:
@@ -83,9 +78,33 @@ services:
     environment:
       PAPERLESS_REDIS: redis://paperless-db:6379
       PAPERLESS_DBENGINE: sqlite
+      PAPERLESS_TIKA_ENABLED: 1
+      PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://paperless-gotenberg:3000
+      PAPERLESS_TIKA_ENDPOINT: http://paperless-tika:9998
       PAPERLESS_SECRET_KEY: ${PAPERLESS_SECRET_KEY}
       PAPERLESS_URL: ${PAPERLESS_URL}
       PAPERLESS_CSRF_TRUSTED_ORIGINS: ${PAPERLESS_CSRF_TRUSTED_ORIGINS}
+
+  paperless-db:
+    image: docker.io/valkey/valkey:9-alpine
+    container_name: paperless-db
+    restart: unless-stopped
+    volumes:
+      - /home/user/data/paperless/valkey:/data
+
+  paperless-gotenberg:
+    image: docker.io/gotenberg/gotenberg:8.34
+    container_name: paperless-gotenberg
+    restart: unless-stopped
+    command:
+      - "gotenberg"
+      - "--chromium-disable-javascript=true"
+      - "--chromium-allow-list=file:///tmp/.*"
+
+  paperless-tika:
+    image: docker.io/apache/tika:3.3.1.0
+    container_name: paperless-tika
+    restart: unless-stopped
 
 #  plex:
 #    image: lscr.io/linuxserver/plex:latest
