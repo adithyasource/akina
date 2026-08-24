@@ -11,4 +11,10 @@ ingress:
   - hostname: pl.1003211.xyz
     service: http://paperless:8000
 
+  - hostname: nd.1003211.xyz
+    service: http://navidrome:4533
+
+  - hostname: ss.1003211.xyz
+    service: http://soulseek:5030
+
   - service: http_status:404

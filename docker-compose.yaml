@@ -106,6 +106,30 @@ services:
     container_name: paperless-tika
     restart: unless-stopped
 
+  navidrome:
+    image: deluan/navidrome:latest
+    container_name: navidrome
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - SLSKD_SHARED_DIR=/music
+    ports:
+      - "4533:4533"
+    volumes:
+      - "/home/user/configs/navidrome:/data"
+      - "/home/user/data/music:/music:ro"
+    restart: unless-stopped
+
+  soulseek:
+    image: slskd/slskd
+    container_name: soulseek
+    user: "1000:1000"
+    environment:
+      - SLSKD_REMOTE_CONFIGURATION=true
+    volumes:
+      - "/home/user/configs/soulseek:/app"
+    restart: unless-stopped
+
 #  plex:
 #    image: lscr.io/linuxserver/plex:latest
 #    container_name: plex
