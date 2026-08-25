@@ -16,11 +16,13 @@ tailscale running on host and set to 100.99.0.0
 
 services running currently on docker:
     cloudflared         for tunnels
-    jellyfin            100.99.0.0:8096
+    jellyfin            jf.1003211.xyz / 100.99.0.0:8096
     qbittorrent         qb.xxxxxxx.xyz
     vaultwarden         vw.xxxxxxx.xyz
     axew                ax.xxxxxxx.xyz
     paperless           pl.xxxxxxx.xyz
+    navidrome           nd.xxxxxxx.xyz / 100.99.0.0:4533
+    soulseek            ss.xxxxxxx.xyz
 
 cron jobs:
     restic              backup vaultwarden to cf r2
