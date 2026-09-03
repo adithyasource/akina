@@ -34,23 +34,6 @@ services:
       - /home/user/data/vaultwarden:/data
     restart: unless-stopped
 
-  qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:latest
-    container_name: qbittorrent
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Kolkata
-      - WEBUI_PORT=8080
-      - TORRENTING_PORT=6881
-    volumes:
-      - /home/user/configs/qbittorrent:/config
-      - /home/user/data/media:/downloads
-    ports:
-      - 6881:6881
-      - 6881:6881/udp
-    restart: unless-stopped
-
   axew:
     image: adithyasrc/axew:latest
     container_name: axew
@@ -63,13 +46,10 @@ services:
   paperless:
     image: ghcr.io/paperless-ngx/paperless-ngx:latest
     container_name: paperless
-    restart: unless-stopped
     depends_on:
       - paperless-db
       - paperless-gotenberg
       - paperless-tika
-    ports:
-      - "8000:8000"
     volumes:
       - /home/user/data/paperless/data:/usr/src/paperless/data
       - /home/user/data/paperless/media:/usr/src/paperless/media
@@ -84,6 +64,7 @@ services:
       PAPERLESS_SECRET_KEY: ${PAPERLESS_SECRET_KEY}
       PAPERLESS_URL: ${PAPERLESS_URL}
       PAPERLESS_CSRF_TRUSTED_ORIGINS: ${PAPERLESS_CSRF_TRUSTED_ORIGINS}
+    restart: unless-stopped
 
   paperless-db:
     image: docker.io/valkey/valkey:9-alpine
@@ -114,15 +95,50 @@ services:
       - PGID=1000
       - SLSKD_SHARED_DIR=/music
     ports:
-      - "4533:4533"
+      - 4533:4533
     volumes:
       - "/home/user/configs/navidrome:/data"
       - "/home/user/data/music:/music:ro"
     restart: unless-stopped
 
+  sabnzbd:
+    image: lscr.io/linuxserver/sabnzbd:latest
+    container_name: sabnzbd
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /home/user/configs/sabnzbd:/config
+    restart: unless-stopped
+
+  # dont need these to run always, turn them on with
+  # docker compose --profile p2p up -d
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    profiles:
+      - p2p
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Kolkata
+      - WEBUI_PORT=8080
+      - TORRENTING_PORT=6881
+    volumes:
+      - /home/user/configs/qbittorrent:/config
+      - /home/user/data/media:/downloads
+    ports:
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
+
   soulseek:
     image: slskd/slskd
     container_name: soulseek
+    profiles:
+      - p2p
     user: "1000:1000"
     environment:
       - SLSKD_REMOTE_CONFIGURATION=true
@@ -130,16 +146,16 @@ services:
       - "/home/user/configs/soulseek:/app"
     restart: unless-stopped
 
-#  plex:
-#    image: lscr.io/linuxserver/plex:latest
-#    container_name: plex
-#    environment:
-#      - PUID=1000
-#      - PGID=1000
-#      - TZ=Asia/Kolkata
-#      - VERSION=docker
-#    volumes:
-#      - /home/user/configs/plex:/config
-#      - /home/user/data/media:/media
-#    network_mode: host
-#    restart: unless-stopped
+  # plex:
+  #   image: lscr.io/linuxserver/plex:latest
+  #   container_name: plex
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=Asia/Kolkata
+  #     - VERSION=docker
+  #   volumes:
+  #     - /home/user/configs/plex:/config
+  #     - /home/user/data/media:/media
+  #   network_mode: host
+  #   restart: unless-stopped
