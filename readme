@@ -6,24 +6,23 @@ i5-3210M
 16gb ddr3 ram
 toshiba 1tb hdd
 
-internal bcm4331 chip
-    connects to the uni's ap for internet
-tplink t3u plus rtl8812bu
-    runs on ap mode for me to connect for high bitrate streaming + internet passthrough
+connected to jio 6401 running openwrt
+router connected to college wifi wirelessly
+and creates another ap for other devices to join
 
-1.111b class domain (xxxxxxx.xyz) registerd on cloudflare
+1.111b class domain registerd on cloudflare
 tailscale running on host and set to 100.99.0.0
 
-services running currently on docker:
+services running via docker:
     cloudflared         for tunnels
-    jellyfin            jf.xxxxxxx.xyz / 100.99.0.0:8096
-    navidrome           nd.xxxxxxx.xyz / 100.99.0.0:4533
-    vaultwarden         vw.xxxxxxx.xyz
-    axew                ax.xxxxxxx.xyz
-    paperless           pl.xxxxxxx.xyz
-    sabnzbd             sa.xxxxxxx.xyz
-    (-) qbittorrent     qb.xxxxxxx.xyz
-    (-) soulseek        ss.xxxxxxx.xyz
+    jellyfin            jf / 100.99.0.0:8096
+    navidrome           nd / 100.99.0.0:4533
+    vaultwarden         vw
+    axew                ax
+    paperless           pl
+    sabnzbd             sa
+    (-) qbittorrent     qb
+    (-) soulseek        ss
 
 cron jobs:
     restic              backup vaultwarden and paperless to cf r2
