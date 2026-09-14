@@ -112,7 +112,7 @@ services:
       - /home/user/configs/sabnzbd:/config
     restart: unless-stopped
 
-  # dont need these to run always, turn them on with
+  # dont need this to run always, turn it on with
   # docker compose --profile p2p up -d
 
   qbittorrent:
@@ -134,18 +134,22 @@ services:
       - 6881:6881/udp
     restart: unless-stopped
 
-  soulseek:
-    image: slskd/slskd
-    container_name: soulseek
-    profiles:
-      - p2p
-    user: "1000:1000"
+  copyparty:
+    image: copyparty/ac:latest
+    container_name: copyparty
     environment:
-      - SLSKD_REMOTE_CONFIGURATION=true
+      GUEST_PASSWORD: ${COPYPARTY_GUEST_PASSWORD}
+    command:
+      - -a
+      - guest:${COPYPARTY_GUEST_PASSWORD}
+    ports:
+      - 3923:3923
     volumes:
-      - "/home/user/configs/soulseek:/app"
-    restart: unless-stopped
+      - /home/user/configs/copyparty/config.conf:/cfg/config.conf:ro
+      - /home/user/configs/copyparty/db:/cfg/hists
+      - /home/user/data/media:/media
 
+ 
   # plex:
   #   image: lscr.io/linuxserver/plex:latest
   #   container_name: plex
