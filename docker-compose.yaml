@@ -148,6 +148,7 @@ services:
       - /home/user/configs/copyparty/config.conf:/cfg/config.conf:ro
       - /home/user/configs/copyparty/db:/cfg/hists
       - /home/user/data/media:/media
+    restart: unless-stopped
 
  
   # plex:

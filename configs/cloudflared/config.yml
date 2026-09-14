@@ -23,4 +23,7 @@ ingress:
   - hostname: sa.1003211.xyz
     service: http://sabnzbd:8080
 
+  - hostname: cp.1003211.xyz
+    service: http://copyparty:3923
+
   - service: http_status:404
