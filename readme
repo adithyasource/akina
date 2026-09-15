@@ -6,9 +6,9 @@ i5-3210M
 16gb ddr3 ram
 toshiba 1tb hdd
 
-connected to jio 6401 running openwrt
+connected via eth to jio 6401 openwrt router
 router connected to college wifi wirelessly
-and creates another ap for other devices to join
+and creates ap for other devices to join
 
 1.111b class domain registerd on cloudflare
 tailscale running on host and set to 100.99.0.0
@@ -21,8 +21,8 @@ services running via docker:
     axew                ax
     paperless           pl
     sabnzbd             sa
+    copyparty           cp
     (-) qbittorrent     qb
-    (-) soulseek        ss
 
 cron jobs:
     restic              backup vaultwarden and paperless to cf r2
