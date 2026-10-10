@@ -27,4 +27,7 @@ ingress:
   - hostname: cp.1003211.xyz
     service: http://copyparty:3923
 
+  - hostname: nz.1003211.xyz
+    service: http://nzbhydra:5076
+
   - service: http_status:404

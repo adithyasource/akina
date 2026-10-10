@@ -20,6 +20,7 @@ services running via docker:
     vaultwarden         vw
     axew                ax
     paperless           pl
+    nzbhydra            nz
     sabnzbd             sa
     copyparty           cp
     (-) qbittorrent     qb

@@ -110,6 +110,7 @@ services:
       - TZ=Etc/UTC
     volumes:
       - /home/user/configs/sabnzbd:/config
+      - /home/user/data:/data
     restart: unless-stopped
 
   copyparty:
@@ -126,6 +127,16 @@ services:
       - /home/user/data/media:/media
     restart: unless-stopped
 
+  nzbhydra:
+    image: lscr.io/linuxserver/nzbhydra2:latest
+    container_name: nzbhydra
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /home/user/configs/nzbhydra:/config
+    restart: unless-stopped
 
   # dont need this to run always, turn it on with
   # docker compose --profile p2p up -d
